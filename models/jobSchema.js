@@ -49,19 +49,19 @@ const jobSchema = new mongoose.Schema({
         minLength: [5, "Minimum 10K INR Should Be Given"],
         maxLength: [6, "Maximum 100K INR Is Allowed"],
     },
-    expired:{
-        type:Boolean,
-        default:false,
+    expired: {
+        type: Boolean,
+        default: false,
     },
-    postedOn:{
-        type:Date,
+    postedOn: {
+        type: Date,
         default: Date.now,
     },
-    postedBy:{
-        type:mongoose.Schema.ObjectId,
-        ref:"User",
-        required:true,
+    postedBy: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
     },
 });
 
-export const Job = mongoose.model("job",jobSchema);
+export const Job = mongoose.model("job", jobSchema);
