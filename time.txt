@@ -1,0 +1,8 @@
+See From 01:30:25
+{
+    "name":"Megh",
+    "phone":123456789,
+    "email":"iammeghdeb@gmail.com",
+    "role" : "Employee",
+    "password" : "123456789"
+}
