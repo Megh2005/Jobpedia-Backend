@@ -23,7 +23,7 @@ export const register = cathAsyncError(async (req, res, next) => {
     sendToken(user, 201, res, "Registration Successfull")
 })
 
-// LOGIN A USER
+// LOG IN A USER
 export const login = cathAsyncError(async (req, res, next) => {
     const { email, password, role } = req.body;
     if (!email || !role || !password) {
@@ -42,3 +42,13 @@ export const login = cathAsyncError(async (req, res, next) => {
     }
     sendToken(user, 200, res, "User Successfully Logged In");
 })
+
+// LOG OUT A USER
+export const logout = cathAsyncError(async(req,res,next)=>{
+    res.status(201).cookie("token","",{
+        httpOnly:true,
+    }).json({
+        success:true,
+        message:"User Logged Out Successfully"
+    });
+});

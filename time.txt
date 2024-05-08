@@ -6,20 +6,3 @@ See From 01:30:25
     "role" : "Employee",
     "password" : "123456789"
 }
-
-
-{
-    "success": true,
-    "user": {
-        "_id": "663b7fd4b73741caef806c76",
-        "name": "Megh",
-        "email": "iammeghdeb@gmail.com",
-        "phone": 123456789,
-        "password": "$2b$08$wbEWNHVbV9m.z7S2y5beYeoq27yC0mTgHMBN4INOGYJnlhUxHO6G6",
-        "role": "Employee",
-        "createdAt": "2024-05-08T13:36:20.267Z",
-        "__v": 0
-    },
-    "message": "User Successfully Logged In",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2M2I3ZmQ0YjczNzQxY2FlZjgwNmM3NiIsImlhdCI6MTcxNTE3NTUyNCwiZXhwIjoxNzE2MDM5NTI0fQ.8HzcOy7_pVxm-52yWWi0AGMrAM8_v19imOBYdlDTw9k"
-}
