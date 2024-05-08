@@ -14,13 +14,31 @@ export const register = cathAsyncError(async (req, res, next) => {
         return next(new ErrorHandler("Email Already Exist"));
     }
     const user = await User.create({
-        name, 
-        email, 
-        phone, 
-        role, 
+        name,
+        email,
+        phone,
+        role,
         password,
     });
-    sendToken(user,201,res,"Registration Successfull")
+    sendToken(user, 201, res, "Registration Successfull")
 })
 
 // LOGIN A USER
+export const login = cathAsyncError(async (req, res, next) => {
+    const { email, password, role } = req.body;
+    if (!email || !role || !password) {
+        return next(new ErrorHandler("Provide All Asked Fields", 400))
+    }
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
+        new ErrorHandler("Invalid Email or Password",400);
+    }
+    const isPasswordMatched = await user.comparePassword(password);
+    if (!isPasswordMatched) {
+        new ErrorHandler("Invalid Email or Password",400);
+    }
+    if (user.role !== role) {
+        new ErrorHandler("User Not Found With This Role");
+    }
+    sendToken(user,200,res,"User Successfully Logged In");
+})
