@@ -31,14 +31,14 @@ export const login = cathAsyncError(async (req, res, next) => {
     }
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
-        new ErrorHandler("Invalid Email or Password",400);
+        return next(new ErrorHandler("Invalid Email or Password", 400));
     }
     const isPasswordMatched = await user.comparePassword(password);
     if (!isPasswordMatched) {
-        new ErrorHandler("Invalid Email or Password",400);
+        return next(new ErrorHandler("Invalid Email or Password", 400));
     }
     if (user.role !== role) {
-        new ErrorHandler("User Not Found With This Role");
+        return next(new ErrorHandler("User Not Found With This Role"));
     }
-    sendToken(user,200,res,"User Successfully Logged In");
+    sendToken(user, 200, res, "User Successfully Logged In");
 })
