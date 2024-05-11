@@ -52,3 +52,12 @@ export const logout = cathAsyncError(async(req,res,next)=>{
         message:"User Logged Out Successfully"
     });
 });
+
+// GET USER
+export const getUser = cathAsyncError((req, res, next) => {
+    const user = req.user;
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  });
