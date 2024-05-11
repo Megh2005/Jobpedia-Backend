@@ -16,7 +16,7 @@ export const postJob = cathAsyncError(async (req, res, next) => {
     }
     const { title, description, category, country, city, state, location, fixedSalary, salaryFrom, salaryTo } = req.body;
     if (!title || !description || !category || !country || !city || !state || !location) {
-        return next(new ErrorHandler("All Required Fields Must Be Filled",400));
+        return next(new ErrorHandler("All Required Fields Must Be Filled", 400));
     }
     if ((!salaryFrom || !salaryTo) && !fixedSalary) {
         return next(new ErrorHandler("Provide Any One Of The Salary Modes"))
@@ -43,4 +43,17 @@ export const postJob = cathAsyncError(async (req, res, next) => {
         message: "Job Posted Successfully",
         job,
     });
-})
+});
+
+
+export const getMyJobs = cathAsyncError(async (req, res, next) => {
+    const { role } = req.user;
+    if (role === "Employee") {
+        return next(new ErrorHandler("An Employee Can't Access This", 400));
+    }
+    const myJobs = await Job.find({ postedBy: req.user._id });
+    res.status(200).json({
+        success: true,
+        myJobs,
+    });
+});
