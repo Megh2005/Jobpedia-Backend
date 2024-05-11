@@ -6,3 +6,13 @@ See From 02:00:11
     "role" : "Employee",
     "password" : "123456789"
 }
+
+"title": "Android Developer",
+"description": "Kotlin Multi Platform Developer",
+"category": "Software",
+"country": "India",
+"city": "Kolkata",
+"state": "West Bengal",
+"location": "New Garia Area",
+"salaryFrom": 1000,
+"salaryTo": 10000,
