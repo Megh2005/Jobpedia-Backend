@@ -57,3 +57,42 @@ export const getMyJobs = cathAsyncError(async (req, res, next) => {
         myJobs,
     });
 });
+
+export const updateJob = cathAsyncError(async (req, res, next) => {
+    const { role } = req.user;
+    if (role === "Employee") {
+        return next(new ErrorHandler("An Employee Can't Access This", 400));
+    }
+    const { id } = req.params;
+    let job = await Job.findById(id);
+    if (!job) {
+        return next(new ErrorHandler("Job Not Found", 404));
+    }
+    job = await Job.findByIdAndUpdate(id, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+    res.status(200).json({
+        success: true,
+        job,
+        message: "Job Updated Successfully"
+    });
+});
+
+export const deleteJob = cathAsyncError(async (req, res, next) => {
+    const { role } = req.user;
+    if (role === "Employee") {
+        return next(new ErrorHandler("An Employee Can't Access This", 400));
+    }
+    const { id } = req.params;
+    let job = await Job.findById(id);
+    if (!job) {
+        return next(new ErrorHandler("Job Not Found", 404));
+    }
+    await job.deleteOne();
+    res.status(200).json({
+        success: true,
+        message: "Job Deleted Successfully"
+    });
+});
